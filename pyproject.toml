@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ha-franklin"
+version = "0.1.0"
+description = ""
+authors = ["Joe Block <jpb@unixorn.net>"]
+readme = "README.md"
+packages = [{include = "ha_franklin"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10.0,<4.0"
+ha-mqtt-discoverable = "^0.8.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+flake8 = "^6.0.0"
+pre-commit = "^3.2.1"
+pytest = "^7.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
