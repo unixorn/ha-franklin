@@ -19,11 +19,11 @@ format:
 
 tests: test ## Run nose tests
 test:
-	poetry run pytest
+	poetry run pytest --cov
 
 verbose-test: verbose_tests
 verbose-tests:
-	poetry run pytest -v
+	poetry run pytest --cov --durations 5 -vv
 
 wheel: clean format requirements.txt ## Make a wheel file
 	poetry build
@@ -43,4 +43,4 @@ multi:
 	make multiimage
 
 requirements.txt: poetry.lock Makefile
-	poetry export -o requirements.txt --without-hashes
+	poetry export -o requirements.txt

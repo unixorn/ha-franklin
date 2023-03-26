@@ -1,0 +1,97 @@
+#    Copyright 2023 Joe Block <jpb@unixorn.net>
+#
+#    Licensed under the Apache License, Version 2.0 (the "License");
+#    you may not use this file except in compliance with the License.
+#    You may obtain a copy of the License at
+#
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+
+import logging
+import os
+import yaml
+
+
+def read_yaml_file(path: str):
+    """
+    Return the data structure contained in a yaml file
+
+    Args:
+        path (str): Path to read from
+
+    Returns:
+        Data decoded from YAML file content
+    """
+    with open(path) as yamlFile:
+        data = yaml.load(yamlFile, Loader=yaml.FullLoader)
+        return data
+
+
+def write_yaml_file(path: str, data):
+    """
+    Writes a data structure into a YAML file
+
+    Args:
+        path (str): Path to data file
+        data (any): Data to convert and write
+    """
+    with open(path, "w") as yamlFile:
+        yaml.safe_dump(data, yamlFile)
+
+
+def load_monitor_settings(path: str, cli):
+    """
+    Load settings from a yaml file, allowing overrides from the CLI
+
+    Args:
+        path: Path to configuration file
+        cli (argparse cli object): Command line options
+
+    Returns:
+        dict: A dictionary containing all of our settings
+    """
+    if os.access(path, os.R_OK):
+        settings = read_yaml_file(path=path)
+    else:
+        logging.error(f"Could not read {path}")
+        settings = {}
+    logging.info(f"Base settings: {settings}")
+
+    # Allow overrides from command line
+    if cli.cups_server:
+        settings["cups_server"] = cli.cups_server
+    if cli.cups_queue_name:
+        settings["cups_queue_name"] = cli.cups_queue_name
+
+    if cli.check_interval:
+        settings["check_interval"] = cli.check_interval
+    if cli.mqtt_server:
+        settings["mqtt_server"] = cli.mqtt_server
+    if cli.mqtt_password:
+        settings["mqtt_password"] = cli.mqtt_password
+    if cli.mqtt_user:
+        settings["mqtt_user"] = cli.mqtt_user
+
+    logging.info(f"Processed settings: {settings}")
+    return settings
+
+
+def setup_logging(
+    log_level: str = "INFO",
+    log_format: str = "[%(asctime)s][%(levelname)8s][%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s",
+):
+    """
+    Set up logging
+
+    Args:
+        cli - An argparse cli object
+    """
+    log_level = getattr(logging, log_level.upper(), None)
+    logging.basicConfig(level=log_level, format=log_format)
+    logging.info("Log level set to %s", log_level)
+    logging.debug(f"Using '{log_format}' for log format")
