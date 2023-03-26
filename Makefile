@@ -11,7 +11,7 @@ t: test
 i: image
 image: local ## Make a docker image that only supports the architecture we're running on for quick testing
 
-MODULE_VERSION=$(shell poetry run python3 -c 'from ha_franklin import __version__;print(__version__)' )
+MODULE_VERSION=$(shell grep '^version = ' pyproject.toml | cut -d= -f2 | awk '{print $1}' | sed s/\"//g | sed 's/ //g')
 IMAGE_NAME=unixorn/ha-franklin
 
 format:

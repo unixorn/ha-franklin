@@ -17,6 +17,7 @@ import logging
 from importlib import metadata
 
 from ha_franklin import __version__ as VERSION
+from ha_franklin.monitor import monitor_cupsd_queue, printer_unreachable
 from ha_franklin.utils import load_monitor_settings, setup_logging
 
 
@@ -48,9 +49,14 @@ def cupsmon_parser(description: str = ""):
     )
 
     parser.add_argument(
-        "--cups-server", "--print-server", type=str, help="DNS name/IP of CUPS server"
+        "--cupsd-server",
+        "--cups-server",
+        "--print-server",
+        type=str,
+        help="DNS name/IP of CUPS server",
     )
     parser.add_argument(
+        "--cupsd-queue-name",
         "--cups-queue-name",
         "--queue-name",
         type=str,
@@ -86,7 +92,22 @@ def cupsmon_cli(description: str):
     return cli
 
 
-def monitor_cupsd_queue():
+def check_cupsd_queue_status_app():
+    """
+    Check a CUPS queue's status
+    """
+    cli = cupsmon_cli(description=f"Check a CUPSD queue's status\nVersion {VERSION}")
+    setup_logging(log_format=cli.log_format, log_level=cli.log_level)
+    settings = load_monitor_settings(path=cli.settings_file, cli=cli)
+    logging.debug(f"Settings: {settings}")
+    printer = settings[0]
+    status = printer_unreachable(
+        server=printer["cupsd_server"], queue=printer["cupsd_queue_name"]
+    )
+    print(f"printer unreachable = {status}")
+
+
+def monitor_cupsd_queue_app():
     """
     Create a CUPS queue monitor
     """
@@ -94,6 +115,7 @@ def monitor_cupsd_queue():
     setup_logging(log_format=cli.log_format, log_level=cli.log_level)
     settings = load_monitor_settings(path=cli.settings_file, cli=cli)
     logging.debug(f"Settings: {settings}")
+    monitor_cupsd_queue(settings=settings[0])
 
 
 def app_summary():

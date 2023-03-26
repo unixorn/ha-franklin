@@ -45,4 +45,3 @@ repos:
     rev: "1.4.1"
     hooks:
       - id: poetry-check
-      - id: poetry-lock

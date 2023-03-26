@@ -8,9 +8,9 @@ packages = [{include = "ha_franklin"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<4.0"
-ha-mqtt-discoverable = "^0.8.0"
 pyaml = "^21.10.1"
 shell = "^1.0.1"
+ha-mqtt-discoverable = "^0.8.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
@@ -26,6 +26,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 ha-cupsd-info = 'ha_franklin.cli:package_summary'
+ha-cupsd-check-printer = 'ha_franklin.cli:check_cupsd_queue_status_app'
 ha-cupsd-monitor = 'ha_franklin.cli:monitor_cupsd_queue_app'
 ha-cupsd-monitor-queue = 'ha_franklin.cli:monitor_cupsd_queue_app'
 ha-cupsd-monitor-version = 'ha_franklin.cli:app_version'

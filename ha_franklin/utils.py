@@ -44,6 +44,36 @@ def write_yaml_file(path: str, data):
         yaml.safe_dump(data, yamlFile)
 
 
+def valid_settings(settings: dict = {}) -> bool:
+    """
+    Validate that we have all settings we need
+
+    Args:
+        settings: Dictionary of settings
+
+    Returns:
+        bool of validity
+    """
+    fails = []
+    required = (
+        "cupsd_server",
+        "cupsd_queue_name",
+        "check_interval",
+        "mqtt_server",
+        "mqtt_user",
+        "mqtt_password",
+    )
+    for rs in required:
+        if rs not in settings:
+            fail_message = f"'{rs}' missing from settings."
+            fails.append(fail_message)
+            logging.critical(fail_message)
+    if len(fails) > 0:
+        return False
+    else:
+        return True
+
+
 def load_monitor_settings(path: str, cli):
     """
     Load settings from a yaml file, allowing overrides from the CLI
@@ -60,13 +90,13 @@ def load_monitor_settings(path: str, cli):
     else:
         logging.error(f"Could not read {path}")
         settings = {}
-    logging.info(f"Base settings: {settings}")
+    logging.debug(f"Base settings: {settings}")
 
     # Allow overrides from command line
-    if cli.cups_server:
-        settings["cups_server"] = cli.cups_server
-    if cli.cups_queue_name:
-        settings["cups_queue_name"] = cli.cups_queue_name
+    if cli.cupsd_server:
+        settings["cupsd_server"] = cli.cupsd_server
+    if cli.cupsd_queue_name:
+        settings["cupsd_queue_name"] = cli.cupsd_queue_name
 
     if cli.check_interval:
         settings["check_interval"] = cli.check_interval
@@ -77,7 +107,7 @@ def load_monitor_settings(path: str, cli):
     if cli.mqtt_user:
         settings["mqtt_user"] = cli.mqtt_user
 
-    logging.info(f"Processed settings: {settings}")
+    logging.debug(f"Processed settings: {settings}")
     return settings
 
 
