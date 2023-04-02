@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 import argparse
+import concurrent.futures
 import logging
 from importlib import metadata
 
@@ -115,7 +116,12 @@ def monitor_cupsd_queue_app():
     setup_logging(log_format=cli.log_format, log_level=cli.log_level)
     settings = load_monitor_settings(path=cli.settings_file, cli=cli)
     logging.debug(f"Settings: {settings}")
-    monitor_cupsd_queue(settings=settings[0])
+    logging.info(f"Found {len(settings)} print queue definitions...")
+    logging.debug("Creating thread pool...")
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=len(settings)
+    ) as monitor_pool:
+        monitor_pool.map(monitor_cupsd_queue, settings)
 
 
 def app_summary():
