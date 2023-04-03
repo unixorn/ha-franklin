@@ -44,3 +44,6 @@ multi:
 
 requirements.txt: poetry.lock Makefile
 	poetry export -o requirements.txt
+
+doctoc: ## Update the TOC
+	doctoc --title '## Table of Contents' README.md
