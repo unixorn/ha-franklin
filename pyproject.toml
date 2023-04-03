@@ -25,9 +25,10 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-ha-cupsd-info = 'ha_franklin.cli:package_summary'
-ha-cupsd-check-printer = 'ha_franklin.cli:check_cupsd_queue_status_app'
+ha-cupsd-info = 'ha_franklin.cli:app_summary'
+ha-cupsd-check-printer = 'ha_franklin.cli:check_cupsd_single_queue_status_app'
 ha-cupsd-monitor = 'ha_franklin.cli:monitor_cupsd_queue_app'
-ha-cupsd-monitor-queue = 'ha_franklin.cli:monitor_cupsd_queue_app'
+ha-cupsd-monitor-single-queue = 'ha_franklin.cli:monitor_single_cupsd_queue_app'
+ha-cupsd-monitor-queues = 'ha_franklin.cli:monitor_cupsd_queue_app'
 ha-cupsd-monitor-version = 'ha_franklin.cli:app_version'
 ha-cupsd-version = 'ha_franklin.cli:app_version'
