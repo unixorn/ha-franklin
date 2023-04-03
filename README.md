@@ -12,6 +12,9 @@
 
   - [Background](#background)
 - [Usage](#usage)
+  - [Configuration](#configuration)
+  - [Running the Monitor](#running-the-monitor)
+  - [Home Assistant](#home-assistant)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -19,11 +22,31 @@
 
 I wanted a non-toy test example of using [ha-mqtt-discoverable](https://github.com/unixorn/ha-mqtt-discoverable/tree/v0.8.1).
 
-`ha-franklin` will monitor a CUPSD print queue, and present a binary sensor to Home Assistant over MQTT showing whether the printer is printing.
+`ha-franklin` will monitor CUPSD print queues, and present a binary sensor to Home Assistant over MQTT showing whether the printer is printing.
 
-I use this to turn the smart switch for the HP4050N in the basement on and off so that by the time I walk downstairs from my office after printing something, Home Assistant has turned on the power to the printer and the job has started printing.
+I use this to turn the smart switch for the HP 4050N in the basement on and off so that by the time I walk downstairs from my office after printing something, Home Assistant has turned on the power to the printer and the job has started printing.
 
 
 # Usage
 
-Create a config file (yaml)
+## Configuration
+
+Create a config file (yaml) with a list of dictionaries in it. Each dictionary should have the following keys:
+- `mqtt_server`: DNS name or a raw IP.
+- `mqtt_user`: the_mqtt_user
+- `mqtt_password`: the_mqtt_password
+- `name`: Franklin@cupsd
+- `unique_id`: printername-cupsd
+- `cupsd_queue_name`: Queue_name_on_cupsd_server
+- `cupsd_server`: cupsd.example.com
+- `check_interval`: 10
+
+The easiest way to create a configuration file is to start by copying `config/config-example.yaml` and editing it to fit.
+
+## Running the Monitor
+
+I recommend using `docker`, `nerdctl` or `podman` to run the tooling in a container.
+
+`docker run -v "$(pwd)/config":/config --rm unixorn/ha-franklin ha-cupsd-monitor-queues --settings-file /config/config.yaml`
+
+## Home Assistant

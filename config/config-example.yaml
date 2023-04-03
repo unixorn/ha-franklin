@@ -1,0 +1,9 @@
+# Test config
+- mqtt_server: mqtt.example.com
+  mqtt_user: the_mqtt_user
+  mqtt_password: the_mqtt_password
+  name: Franklin@cupsd
+  unique_id: printername-cupsd
+  cupsd_queue_name: Queue_name_on_cupsd_server
+  cupsd_server: cupsd.example.com
+  check_interval: 10
