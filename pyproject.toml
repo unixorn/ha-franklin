@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ha-franklin"
-version = "0.1.0"
+version = "0.1.1"
 description = "ha-franklin monitors CUPSD queues and writes information to MQTT for Home Assistant"
 authors = ["Joe Block <jpb@unixorn.net>"]
 readme = "README.md"

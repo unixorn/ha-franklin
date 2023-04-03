@@ -14,16 +14,17 @@
 - [Usage](#usage)
   - [Configuration](#configuration)
   - [Running the Monitor](#running-the-monitor)
+  - [Home Assistant](#home-assistant)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Background
 
-I wanted a non-toy test example of using [ha-mqtt-discoverable](https://github.com/unixorn/ha-mqtt-discoverable/tree/v0.8.1).
+I wanted a non-toy test example of using the [ha-mqtt-discoverable](https://github.com/unixorn/ha-mqtt-discoverable/tree/v0.8.1) module.
 
 `ha-franklin` will monitor CUPSD print queues, and present a binary sensor to Home Assistant over MQTT showing whether the printer is printing.
 
-I use this to turn the smart switch for the HP 4050N in the basement on and off so that by the time I walk downstairs from my office after printing something, Home Assistant has turned on the power to the printer and the job has started printing.
+I use this to turn the smart switch for the HP 4050N in the basement on and off so that by the time I walk downstairs from my office after printing something, Home Assistant has turned on the power to the printer and the job has at least started printing.
 
 
 ## Usage
@@ -47,3 +48,15 @@ The easiest way to create a configuration file is to start by copying `config/co
 I recommend using `docker`, `nerdctl` or `podman` to run the tooling in a container.
 
 `docker run -v "$(pwd)/config":/config --rm unixorn/ha-franklin ha-cupsd-monitor-queues --settings-file /config/config.yaml`
+
+### Home Assistant
+
+The container will create a set of MQTT topics using Home Assistant's MQTT discoverability protocol so that your print queue's printing status shows up in Home Assistant.
+
+I set up two automations - one to turn on the peanut plug my HP 4050N is plugged into when jobs appear in the cupsd queue when the sensor turns to on, and a second that turns it off once the sensor switches back to off for ten minutes.
+
+I give it ten minutes for a couple of reasons:
+
+First, because CUPSD will report the queue as done printing when all the postscript has been spooled to the printer. Depending on the complexity of the print job, it may take a minute or two to print the last few pages of the job, even though cupsd considers it complete. If the power gets turned off too soon, you can lose the last page or two of the job, and more annoyingly, cause a printer jam if the power cuts off while a page is moving through the paper path.
+
+Secondly, because although I print rarely, when I do, I typically print several things within a few minutes and I'd prefer to not toggle the printer on and off more than is strictly necessary.

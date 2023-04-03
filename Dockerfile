@@ -26,5 +26,6 @@ COPY dist/*.whl /app
 RUN pip install --no-cache-dir --disable-pip-version-check /app/*.whl \
   && rm -fr /tmp/*
 
+USER nobody
 # Default shell
 CMD ["/bin/bash",]
