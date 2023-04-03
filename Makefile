@@ -32,7 +32,7 @@ local: wheel
 	docker buildx build --load -t ${IMAGE_NAME} --build-arg application_version=${MODULE_VERSION} .
 
 multiimage: wheel ## Make a multi-architecture docker image
-	docker buildx build --platform linux/arm64,linux/amd64 --push -t ${IMAGE_NAME}:${MODULE_VERSION} --build-arg application_version=${MODULE_VERSION} .
+	docker buildx build --platform linux/arm64,linux/amd64,linux/arm/v7 --push -t ${IMAGE_NAME}:${MODULE_VERSION} --build-arg application_version=${MODULE_VERSION} .
 	make local
 
 clean: ## Clean up our checkout
