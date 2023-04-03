@@ -10,11 +10,10 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
-  - [Background](#background)
+- [Background](#background)
 - [Usage](#usage)
   - [Configuration](#configuration)
   - [Running the Monitor](#running-the-monitor)
-  - [Home Assistant](#home-assistant)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -27,9 +26,9 @@ I wanted a non-toy test example of using [ha-mqtt-discoverable](https://github.c
 I use this to turn the smart switch for the HP 4050N in the basement on and off so that by the time I walk downstairs from my office after printing something, Home Assistant has turned on the power to the printer and the job has started printing.
 
 
-# Usage
+## Usage
 
-## Configuration
+### Configuration
 
 Create a config file (yaml) with a list of dictionaries in it. Each dictionary should have the following keys:
 - `mqtt_server`: DNS name or a raw IP.
@@ -43,10 +42,8 @@ Create a config file (yaml) with a list of dictionaries in it. Each dictionary s
 
 The easiest way to create a configuration file is to start by copying `config/config-example.yaml` and editing it to fit.
 
-## Running the Monitor
+### Running the Monitor
 
 I recommend using `docker`, `nerdctl` or `podman` to run the tooling in a container.
 
 `docker run -v "$(pwd)/config":/config --rm unixorn/ha-franklin ha-cupsd-monitor-queues --settings-file /config/config.yaml`
-
-## Home Assistant

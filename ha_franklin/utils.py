@@ -28,7 +28,7 @@ def read_yaml_file(path: str):
         Data decoded from YAML file content
     """
     with open(path) as yamlFile:
-        data = yaml.load(yamlFile, Loader=yaml.FullLoader)
+        data = yaml.safe_load(yamlFile)
         return data
 
 

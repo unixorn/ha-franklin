@@ -1,3 +1,4 @@
+---
 # Test config
 - mqtt_server: mqtt.example.com
   mqtt_user: the_mqtt_user
