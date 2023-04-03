@@ -63,7 +63,9 @@ def valid_settings(settings: dict = {}) -> bool:
         "mqtt_user",
         "mqtt_password",
     )
+    logging.debug(f"Settings: {settings}")
     for rs in required:
+        logging.debug(f"Checking for {rs}...")
         if rs not in settings:
             fail_message = f"'{rs}' missing from settings."
             fails.append(fail_message)
@@ -85,19 +87,12 @@ def load_monitor_settings(path: str, cli):
     Returns:
         dict: A dictionary containing all of our settings
     """
-    if os.access(path, os.R_OK):
-        settings = read_yaml_file(path=path)
-    else:
-        logging.error(f"Could not read {path}")
-        settings = {}
-    logging.debug(f"Base settings: {settings}")
-
+    settings = {}
     # Allow overrides from command line
     if cli.cupsd_server:
         settings["cupsd_server"] = cli.cupsd_server
     if cli.cupsd_queue_name:
         settings["cupsd_queue_name"] = cli.cupsd_queue_name
-
     if cli.check_interval:
         settings["check_interval"] = cli.check_interval
     if cli.mqtt_server:
@@ -106,6 +101,28 @@ def load_monitor_settings(path: str, cli):
         settings["mqtt_password"] = cli.mqtt_password
     if cli.mqtt_user:
         settings["mqtt_user"] = cli.mqtt_user
+
+    logging.debug(f"Processed settings: {settings}")
+    return settings
+
+
+def load_multiple_monitor_settings(path: str, cli):
+    """
+    Load settings from a yaml file
+
+    Args:
+        path: Path to configuration file
+        cli (argparse cli object): Command line options
+
+    Returns:
+        dict: A dictionary containing settings for a group of CUPSD queues
+    """
+    if os.access(path, os.R_OK):
+        settings = read_yaml_file(path=path)
+    else:
+        logging.error(f"Could not read {path}")
+        settings = {}
+    logging.debug(f"Base settings: {settings}")
 
     logging.debug(f"Processed settings: {settings}")
     return settings

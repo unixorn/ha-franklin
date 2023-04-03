@@ -58,7 +58,6 @@ def printer_unreachable(server: str = "", queue: str = "") -> bool:
         if j.strip() == PRINTER_UNREACHABLE:
             logging.warning(f"Found '{j.strip()}'")
             return True
-
     return False
 
 
