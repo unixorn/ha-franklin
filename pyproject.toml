@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "ha-franklin"
+version = "0.1.0"
+description = "ha-franklin monitors CUPSD queues and writes information to MQTT for Home Assistant"
+authors = ["Joe Block <jpb@unixorn.net>"]
+readme = "README.md"
+packages = [{include = "ha_franklin"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10.0,<4.0"
+pyaml = "^21.10.1"
+shell = "^1.0.1"
+ha-mqtt-discoverable = "^0.8.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+flake8 = "^6.0.0"
+pre-commit = "^3.2.1"
+pytest = "^7.2.2"
+pytest-randomly = "^3.12.0"
+pytest-cov = "^4.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+ha-cupsd-info = 'ha_franklin.cli:app_summary'
+ha-cupsd-check-printer = 'ha_franklin.cli:check_cupsd_single_queue_status_app'
+ha-cupsd-monitor = 'ha_franklin.cli:monitor_cupsd_queue_app'
+ha-cupsd-monitor-single-queue = 'ha_franklin.cli:monitor_single_cupsd_queue_app'
+ha-cupsd-monitor-queues = 'ha_franklin.cli:monitor_cupsd_queue_app'
+ha-cupsd-monitor-version = 'ha_franklin.cli:app_version'
+ha-cupsd-version = 'ha_franklin.cli:app_version'
