@@ -5,6 +5,7 @@ description = "ha-franklin monitors CUPSD queues and writes information to MQTT 
 authors = ["Joe Block <jpb@unixorn.net>"]
 readme = "README.md"
 packages = [{include = "ha_franklin"}]
+license = "Apache 2.0"
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<4.0"
