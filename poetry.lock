@@ -447,14 +447,14 @@ virtualenv = ">=20.10.0"
 
 [[package]]
 name = "pyaml"
-version = "25.7.0"
+version = "26.2.1"
 description = "PyYAML-based module to produce a bit more pretty and readable YAML-serialized data"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "pyaml-25.7.0-py3-none-any.whl", hash = "sha256:ce5d7867cc2b455efdb9b0448324ff7b9f74d99f64650f12ca570102db6b985f"},
-    {file = "pyaml-25.7.0.tar.gz", hash = "sha256:e113a64ec16881bf2b092e2beb84b7dcf1bd98096ad17f5f14e8fb782a75d99b"},
+    {file = "pyaml-26.2.1-py3-none-any.whl", hash = "sha256:6261c2f0a2f33245286c794ad6ec234be33a73d2b05427079fd343e2812a87cf"},
+    {file = "pyaml-26.2.1.tar.gz", hash = "sha256:489dd82997235d4cfcf76a6287fce2f075487d77a6567c271e8d790583690c68"},
 ]
 
 [package.dependencies]
@@ -881,4 +881,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10.0,<4.0"
-content-hash = "8d90f0bea3623be53dd4d8957c009f96b195a54bd0f47b317c3832eab7ca2284"
+content-hash = "adf5a4793da17b7a54b6cf97872bb40e62adf1aca02ae28a2cb50fd38d948c55"
