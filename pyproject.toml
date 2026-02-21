@@ -9,7 +9,7 @@ license = "Apache 2.0"
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<4.0"
-pyaml = ">=21.10.1,<26.0.0"
+pyaml = ">=21.10.1,<27.0.0"
 shell = "^1.0.1"
 ha-mqtt-discoverable = ">=0.8.1,<0.24.0"
 
