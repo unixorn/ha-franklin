@@ -268,19 +268,19 @@ pyflakes = ">=3.4.0,<3.5.0"
 
 [[package]]
 name = "ha-mqtt-discoverable"
-version = "0.23.0"
+version = "0.24.1"
 description = "Python library for creating MQTT entities compatible with Home Assistant"
 optional = false
 python-versions = "<4.0,>=3.10.0"
 groups = ["main"]
 files = [
-    {file = "ha_mqtt_discoverable-0.23.0-py3-none-any.whl", hash = "sha256:99be1c3d3b48359bd7e897594d09948480a3f9a7f23bb3efe52d46d00cb62d29"},
-    {file = "ha_mqtt_discoverable-0.23.0.tar.gz", hash = "sha256:0f3196636b5486710c6835fbeebd4b0cbe69d0ee235d40bc73146aabf5228e81"},
+    {file = "ha_mqtt_discoverable-0.24.1-py3-none-any.whl", hash = "sha256:bdac58b69e70dff3f5eea0f0a5299923abb5b639e93efb2f7b292672182dda50"},
+    {file = "ha_mqtt_discoverable-0.24.1.tar.gz", hash = "sha256:fa165d1ec2f4de166627de0d21d57d57d1ffc5067ec6fbd1675f7c9d4a7d8c1d"},
 ]
 
 [package.dependencies]
 paho-mqtt = "2.1.0"
-pydantic = "2.12.4"
+pydantic = "2.12.5"
 
 [[package]]
 name = "identify"
@@ -477,14 +477,14 @@ files = [
 
 [[package]]
 name = "pydantic"
-version = "2.12.4"
+version = "2.12.5"
 description = "Data validation using Python type hints"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "pydantic-2.12.4-py3-none-any.whl", hash = "sha256:92d3d202a745d46f9be6df459ac5a064fdaa3c1c4cd8adcfa332ccf3c05f871e"},
-    {file = "pydantic-2.12.4.tar.gz", hash = "sha256:0f8cb9555000a4b5b617f66bfd2566264c4984b27589d3b845685983e8ea85ac"},
+    {file = "pydantic-2.12.5-py3-none-any.whl", hash = "sha256:e561593fccf61e8a20fc46dfc2dfe075b8be7d0188df33f221ad1f0139180f9d"},
+    {file = "pydantic-2.12.5.tar.gz", hash = "sha256:4d351024c75c0f085a9febbb665ce8c0c6ec5d30e903bdb6394b7ede26aebb49"},
 ]
 
 [package.dependencies]
@@ -921,4 +921,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10.0,<4.0"
-content-hash = "adf5a4793da17b7a54b6cf97872bb40e62adf1aca02ae28a2cb50fd38d948c55"
+content-hash = "b455e624b250e97fd6ae44d4ad239e8faff5a2fc08ec1d7bc5d100375e83117e"
